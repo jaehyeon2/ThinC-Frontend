@@ -24,7 +24,7 @@ class StoreFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_store, container, false)
 
         val webView : WebView = view.findViewById(R.id.storeWebView)
-        webView.loadUrl("https://www.inflearn.com/")
+        webView.loadUrl("https://www.lge.co.kr/lg-thinq")
 
 
         return view
