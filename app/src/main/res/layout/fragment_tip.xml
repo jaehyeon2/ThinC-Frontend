@@ -20,26 +20,31 @@
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
+                <ImageView
+                    android:src="@drawable/recipe1"
+                    android:layout_width="match_parent"
+                    android:layout_height="89dp"/>
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="150dp">
+                    android:layout_height="120dp">
 
                     <ImageView
                         android:id="@+id/category1"
-                        android:src="@drawable/main_icon_all"
+                        android:src="@drawable/icon1"
                         android:layout_weight="1"
                         android:layout_width="120dp"
                         android:layout_height="120dp"/>
 
                     <ImageView
                         android:id="@+id/category2"
-                        android:src="@drawable/main_icon_cook"
+                        android:src="@drawable/icon2"
                         android:layout_weight="1"
                         android:layout_width="120dp"
                         android:layout_height="120dp"/>
 
                     <ImageView
-                        android:src="@drawable/main_icon_economy"
+                        android:src="@drawable/icon3"
                         android:layout_weight="1"
                         android:layout_width="120dp"
                         android:layout_height="120dp"/>
@@ -51,21 +56,21 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:text="category"
+                        android:text="전체"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:layout_weight="1"/>
 
                     <TextView
-                        android:text="category"
+                        android:text="반찬"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:layout_weight="1"/>
 
                     <TextView
-                        android:text="category"
+                        android:text="찌개"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -76,76 +81,25 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="150dp">
+                    android:layout_height="120dp">
 
                     <ImageView
-                        android:src="@drawable/main_icon_else"
+                        android:src="@drawable/icon4"
                         android:layout_weight="1"
                         android:layout_width="120dp"
                         android:layout_height="120dp"/>
 
                     <ImageView
-                        android:src="@drawable/main_icon_hobby"
+                        android:src="@drawable/icon5"
                         android:layout_weight="1"
                         android:layout_width="120dp"
                         android:layout_height="120dp"/>
 
                     <ImageView
-                        android:src="@drawable/main_icon_interior"
+                        android:src="@drawable/icon6"
                         android:layout_weight="1"
                         android:layout_width="120dp"
                         android:layout_height="120dp"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:text="category"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_weight="1"/>
-
-                    <TextView
-                        android:text="category"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_weight="1"/>
-
-                    <TextView
-                        android:text="category"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_weight="1"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp">
-
-                    <ImageView
-                        android:src="@drawable/main_icon_life"
-                        android:layout_weight="1"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"/>
-
-                    <ImageView
-                        android:src="@drawable/main_icon_oneroom"
-                        android:layout_weight="1"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"/>
-
-                    <ImageView
-                        android:layout_weight="1"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"/>
-
 
                 </LinearLayout>
 
@@ -154,14 +108,65 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:text="category"
+                        android:text="디저트"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:text="밑반찬"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:text=" 국물 "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp">
+
+                    <ImageView
+                        android:src="@drawable/icon7"
+                        android:layout_weight="1"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"/>
+
+                    <ImageView
+                        android:src="@drawable/icon8"
+                        android:layout_weight="1"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"/>
+
+                    <ImageView
+                        android:layout_weight="1"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="빵"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:layout_weight="1"/>
 
                     <TextView
-                        android:text="category"
+                        android:text="샐러드"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
