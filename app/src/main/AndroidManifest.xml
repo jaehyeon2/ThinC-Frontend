@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Heaven"
         android:usesCleartextTraffic="true">
+        <activity android:name=".board.BoardTwoActivity" />
+        <activity android:name=".board.BoardMyActivity" />
+        <activity android:name=".board.BoardOneActivity" />
         <activity android:name=".setting.SearchActivity" />
         <activity android:name=".setting.SettingActivity" />
         <activity android:name=".board.BoardEditActivity" />
