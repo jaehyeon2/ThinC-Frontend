@@ -15,7 +15,7 @@
 
         <ImageView
             android:id="@+id/imageArea"
-            android:src="@drawable/main_icon_oneroom"
+            android:src="@drawable/icon1"
             android:scaleType="fitXY"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
