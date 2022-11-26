@@ -12,22 +12,22 @@ import com.google.firebase.ktx.Firebase
 
 class SplashActivity : AppCompatActivity() {
 
-//    private lateinit var auth: FirebaseAuth // 구글계정
+    private lateinit var auth: FirebaseAuth // 구글계정
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-//        auth = Firebase.auth
-//
-//        if(auth.currentUser?.uid == null) {
-//            Log.d("SplashActivity", "null")
-//
-//            Handler().postDelayed({
-//                startActivity(Intent(this, IntroActivity::class.java))
-//                finish()
-//            }, 3000)
+        auth = Firebase.auth
+
+        if(auth.currentUser?.uid == null) {
+            Log.d("SplashActivity", "null")
+
+            Handler().postDelayed({
+                startActivity(Intent(this, IntroActivity::class.java))
+                finish()
+            }, 3000)
 
         } else {
             Log.d("SplashActivity", "not null")
