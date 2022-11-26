@@ -8,12 +8,18 @@
         <entry key="..\:/Users/jaejunisland/AndroidStudioProjects/Heaven/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26979166666666665" />
         <entry key="..\:/Users/jaejunisland/AndroidStudioProjects/Heaven/app/src/main/res/drawable/ic_launcher_background.xml" value="0.26979166666666665" />
         <entry key="..\:/Users/jaejunisland/AndroidStudioProjects/Heaven/app/src/main/res/layout/activity_board_edit.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/jaejunisland/AndroidStudioProjects/Heaven/app/src/main/res/layout/activity_board_edit2.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/jaejunisland/AndroidStudioProjects/Heaven/app/src/main/res/layout/activity_board_edit3.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/jaejunisland/AndroidStudioProjects/Heaven/app/src/main/res/layout/activity_board_home.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/jaejunisland/AndroidStudioProjects/Heaven/app/src/main/res/layout/activity_board_inside.xml" value="0.1453125" />
+        <entry key="..\:/Users/jaejunisland/AndroidStudioProjects/Heaven/app/src/main/res/layout/activity_board_inside2.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/jaejunisland/AndroidStudioProjects/Heaven/app/src/main/res/layout/activity_board_inside3.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/jaejunisland/AndroidStudioProjects/Heaven/app/src/main/res/layout/activity_board_my.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/jaejunisland/AndroidStudioProjects/Heaven/app/src/main/res/layout/activity_board_one.xml" value="0.1" />
         <entry key="..\:/Users/jaejunisland/AndroidStudioProjects/Heaven/app/src/main/res/layout/activity_board_two.xml" value="0.1" />
         <entry key="..\:/Users/jaejunisland/AndroidStudioProjects/Heaven/app/src/main/res/layout/activity_board_write.xml" value="0.14583333333333334" />
+        <entry key="..\:/Users/jaejunisland/AndroidStudioProjects/Heaven/app/src/main/res/layout/activity_board_write2.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/jaejunisland/AndroidStudioProjects/Heaven/app/src/main/res/layout/activity_board_write3.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/jaejunisland/AndroidStudioProjects/Heaven/app/src/main/res/layout/activity_comment_lvactivity.xml" value="0.25" />
         <entry key="..\:/Users/jaejunisland/AndroidStudioProjects/Heaven/app/src/main/res/layout/activity_content_list.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/jaejunisland/AndroidStudioProjects/Heaven/app/src/main/res/layout/activity_content_show.xml" value="0.25364583333333335" />
@@ -21,7 +27,7 @@
         <entry key="..\:/Users/jaejunisland/AndroidStudioProjects/Heaven/app/src/main/res/layout/activity_intro.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/jaejunisland/AndroidStudioProjects/Heaven/app/src/main/res/layout/activity_join.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/jaejunisland/AndroidStudioProjects/Heaven/app/src/main/res/layout/activity_login.xml" value="0.25364583333333335" />
-        <entry key="..\:/Users/jaejunisland/AndroidStudioProjects/Heaven/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/jaejunisland/AndroidStudioProjects/Heaven/app/src/main/res/layout/activity_main.xml" value="0.152" />
         <entry key="..\:/Users/jaejunisland/AndroidStudioProjects/Heaven/app/src/main/res/layout/activity_search.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/jaejunisland/AndroidStudioProjects/Heaven/app/src/main/res/layout/activity_setting.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/jaejunisland/AndroidStudioProjects/Heaven/app/src/main/res/layout/activity_splash.xml" value="0.152" />

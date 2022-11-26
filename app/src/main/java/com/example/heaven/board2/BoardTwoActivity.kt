@@ -1,4 +1,4 @@
-package com.example.heaven.board
+package com.example.heaven.board2
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,66 +6,67 @@ import android.os.Bundle
 import android.util.Log
 import androidx.databinding.DataBindingUtil
 import com.example.heaven.R
-import com.example.heaven.databinding.ActivityBoardOneBinding
+import com.example.heaven.board.BoardInsideActivity
+import com.example.heaven.board.BoardWriteActivity
+import com.example.heaven.databinding.ActivityBoardTwoBinding
 import com.example.heaven.utils.FBRef
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 
 
-class BoardMyActivity : AppCompatActivity() {
+class BoardTwoActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityBoardOneBinding
+    private lateinit var binding : ActivityBoardTwoBinding
 
-    private val boardDataList = mutableListOf<BoardModel>()
+    private val boardDataList = mutableListOf<BoardModel2>()
     private val boardKeyList = mutableListOf<String>()
 
-    private val TAG = BoardMyActivity::class.java.simpleName
+    private val TAG = BoardTwoActivity::class.java.simpleName
 
-    private lateinit var boardRVAdapter : BoardListLVAdapter
+    private lateinit var boardRVAdapter : BoardListLV2Adapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_board_one)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_board_two)
 
-        boardRVAdapter = BoardListLVAdapter(boardDataList)
-        binding.boardListView.adapter = boardRVAdapter
+        boardRVAdapter = BoardListLV2Adapter(boardDataList)
+        binding.boardListView2.adapter = boardRVAdapter
+
+        binding.boardListView2.setOnItemClickListener { parent, view, position, id ->
 
 
-        binding.boardListView.setOnItemClickListener { parent, view, position, id ->
-
-
-            val intent = Intent(this, BoardInsideActivity::class.java)
+            val intent = Intent(this, BoardInside2Activity::class.java)
             intent.putExtra("key", boardKeyList[position])
             startActivity(intent)
         }
 
         binding.writeBtn.setOnClickListener {
-            val intent = Intent(this, BoardWriteActivity::class.java)
+            val intent = Intent(this, BoardWrite2Activity::class.java)
             startActivity(intent)
         }
 
-        getFBBoardData()
+        getFBBoard2Data()
 
     }
 
-    private fun getFBBoardData(){
+    private fun getFBBoard2Data(){
 
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 boardDataList.clear()
 
-                for (dataModel in dataSnapshot.children) {
+                for (dataModel2 in dataSnapshot.children) {
 
-                    Log.d(TAG, dataModel.toString())
+                    Log.d(TAG, dataModel2.toString())
 //                    dataModel.key
 
-                    val item = dataModel.getValue(BoardModel::class.java)
+                    val item = dataModel2.getValue(BoardModel2::class.java)
                     boardDataList.add(item!!)
-                    boardKeyList.add(dataModel.key.toString())
+                    boardKeyList.add(dataModel2.key.toString())
 
                 }
                 boardKeyList.reverse()
@@ -82,7 +83,7 @@ class BoardMyActivity : AppCompatActivity() {
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
             }
         }
-        FBRef.boardRef.addValueEventListener(postListener)
+        FBRef.boardRef2.addValueEventListener(postListener)
 
     }
 }
