@@ -24,14 +24,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="0dp"
             android:orientation="vertical">
 
             <EditText
                 android:id="@+id/emailArea"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:hint="email"
+                android:layout_height="35dp"
+                android:hint="id"
                 style="@style/AuthEditText"
                 />
 
@@ -46,7 +46,7 @@
             <EditText
                 android:id="@+id/passwordArea1"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="35dp"
                 android:inputType="textPassword"
                 android:hint="password"
                 style="@style/AuthEditText"
@@ -62,11 +62,54 @@
             <EditText
                 android:id="@+id/passwordArea2"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="35dp"
                 android:inputType="textPassword"
                 android:hint="password check"
                 style="@style/AuthEditText"
                 />
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:background="#999999"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                android:layout_height="0.5dp"/>-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="#999999"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="0.5dp"/>
+<!--                android:orientation="horizontal"-->
+<!--                />-->
+
+            <EditText
+                android:id="@+id/nicknameArea"
+                style="@style/AuthEditText"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_weight="3"
+                android:hint="nickname" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="#999999"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="0.5dp"/>
+
+<!--                <Button-->
+<!--                    android:id="@+id/checkNick"-->
+<!--                    android:layout_margin="0dp"-->
+<!--                    android:background="@drawable/background_radius_yellow"-->
+<!--                    android:text="닉네임 확인"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_height="50dp"/>-->
+
+<!--            </LinearLayout>-->
+
 
             <LinearLayout
                 android:layout_width="match_parent"

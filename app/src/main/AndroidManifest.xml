@@ -31,8 +31,8 @@
         <activity android:name=".contentsList.ContentShowActivity" />
         <activity android:name=".contentsList.ContentListActivity" />
         <activity android:name=".auth.JoinActivity" />
-        <activity android:name=".auth.LoginActivity" />
         <activity android:name=".auth.IntroActivity" />
+        <activity android:name=".auth.LoginActivity" />
         <activity
             android:name=".SplashActivity"
             android:exported="true">
@@ -44,5 +44,6 @@
         </activity>
         <activity android:name=".MainActivity" />
     </application>
+
 
 </manifest>

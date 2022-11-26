@@ -3,9 +3,7 @@ package com.example.heaven
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import android.widget.ImageView
-import com.example.heaven.auth.IntroActivity
 import com.example.heaven.setting.SearchActivity
 import com.example.heaven.setting.SettingActivity
 import com.google.firebase.auth.FirebaseAuth

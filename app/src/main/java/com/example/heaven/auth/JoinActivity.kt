@@ -3,84 +3,141 @@ package com.example.heaven.auth
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
-import com.example.heaven.MainActivity
-import com.example.heaven.R
 import com.example.heaven.databinding.ActivityJoinBinding
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
+import java.net.URL
 
 class JoinActivity : AppCompatActivity() {
+    private val bindingJoin by lazy { ActivityJoinBinding.inflate(layoutInflater) }
 
-    private lateinit var auth: FirebaseAuth
-
-    private lateinit var binding: ActivityJoinBinding
-
+    var checkNick = true
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
+        setContentView(bindingJoin.root)
 
-        auth = Firebase.auth
+//        bindingJoin.checkNick.setOnClickListener{
+//            checkNick = checkNickname()
+//        }
+        bindingJoin.joinBtn.setOnClickListener {
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_join)
-
-        binding.joinBtn.setOnClickListener {
-
-            var isGoToJoin = true
-
-            val email = binding.emailArea.text.toString()
-            val password1 = binding.passwordArea1.text.toString()
-            val password2 = binding.passwordArea2.text.toString()
-
-            // 저기 값이 비어있는지 확인
-            if(email.isEmpty()) {
-                Toast.makeText(this, "이메일을 입력해주세요", Toast.LENGTH_LONG).show()
-                isGoToJoin = false
-            }
-
-            if(password1.isEmpty()) {
-                Toast.makeText(this, "Password1을 입력해주세요", Toast.LENGTH_LONG).show()
-                isGoToJoin = false
-            }
-
-            if(password2.isEmpty()) {
-                Toast.makeText(this, "Password2을 입력해주세요", Toast.LENGTH_LONG).show()
-                isGoToJoin = false
-            }
-
-            // 비밀번호 2개가 같은지 확인
-            if(!password1.equals(password2)) {
-                Toast.makeText(this, "비밀번호를 똑같이 입력해주세요", Toast.LENGTH_LONG).show()
-                isGoToJoin = false
-            }
-
-            // 비밀번호가 6자 이상인지
-            if (password1.length < 6) {
-                Toast.makeText(this, "비밀번호를 6자리 이상으로 입력해주세요", Toast.LENGTH_LONG).show()
-                isGoToJoin = false
-            }
-
-            if(isGoToJoin) {
-
-                auth.createUserWithEmailAndPassword(email, password1).addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(this, "성공", Toast.LENGTH_LONG).show()
-
-                        val intent = Intent(this, MainActivity::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        startActivity(intent)
-
-
-                    } else {
-                        Toast.makeText(this, "실패", Toast.LENGTH_LONG).show()
-                    }
-                }
-
-            }
-
+            join()
 
         }
     }
+
+    private fun join(){
+        var isGoToJoin = true
+        var mess:String
+
+
+        val id = bindingJoin.emailArea.text.toString()
+        val pw = bindingJoin.passwordArea1.text.toString()
+        val pw_re = bindingJoin.passwordArea2.text.toString()
+        val nickname = bindingJoin.nicknameArea.text.toString()
+
+        // 저기 값이 비어있는지 확인
+        if(id.isEmpty()) {
+            Toast.makeText(this, "아이디를 입력해주세요", Toast.LENGTH_LONG).show()
+            isGoToJoin = false
+        }
+
+        if(pw.isEmpty()) {
+            Toast.makeText(this, "비밀번호를 입력해주세요", Toast.LENGTH_LONG).show()
+            isGoToJoin = false
+        }
+
+        if(pw_re.isEmpty()) {
+            Toast.makeText(this, "비밀번호를 다시 입력해주세요", Toast.LENGTH_LONG).show()
+            isGoToJoin = false
+        }
+
+        // 비밀번호 2개가 같은지 확인
+        if(!pw.equals(pw_re)) {
+            Toast.makeText(this, "비밀번호가 일치하지 않습니다", Toast.LENGTH_LONG).show()
+            isGoToJoin = false
+        }
+
+        // 비밀번호가 6자 이상인지
+        if (pw.length < 6) {
+            Toast.makeText(this, "비밀번호를 6자리 이상으로 입력해주세요", Toast.LENGTH_LONG).show()
+            isGoToJoin = false
+        }
+
+        if (nickname.isEmpty()){
+            Toast.makeText(this, "닉네임을 입력해주세요", Toast.LENGTH_LONG).show()
+            isGoToJoin = false
+        }
+
+
+
+        val url = URL("http://10.0.2.2:8080/join?id=$id&pw=$pw&nick=$nickname")
+
+
+        Thread{
+            try{
+                if(isGoToJoin&&checkNick) {
+
+                    val connection = url.openConnection() as HttpURLConnection
+
+                    val streamReader = InputStreamReader(connection.inputStream)
+                    val buffered = BufferedReader(streamReader)
+
+                    val content = StringBuilder()
+                    while (true) {
+                        val data = buffered.readLine() ?: break
+                        content.append(data)
+                    }
+
+                    Log.w("message", content.toString())
+                    if (content.toString().equals("join success")) {
+                        Log.w("test", "success")
+                        val intent = Intent(this, LoginActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }else{
+                        val handler = Handler(Looper.getMainLooper())
+                        handler.postDelayed(Runnable {
+                            Toast.makeText(this, "이미 존재하는 아이디입니다.", Toast.LENGTH_LONG).show()
+                        }, 0)
+                    }
+                }
+            } catch (e:Exception){
+                e.printStackTrace()
+            }
+        }.start()
+    }
+//    private fun checkNickname():Boolean{
+//        var message2 = "null"
+//        Thread{
+//            try{
+//                val nickname = bindingJoin.nicknameArea.text.toString()
+//                val url = URL("http://10.0.2.2:8080/checknick?nick=$nickname")
+//                val connection = url.openConnection() as HttpURLConnection
+//
+//                val message = BufferedReader(InputStreamReader(connection.getInputStream())).use { inp ->
+//                    var line: String?
+//                    while (inp.readLine().also { line = it } != null){
+//                        println(line)
+//                    }
+//                }
+//                message2 = message.toString()
+//
+//
+//            }catch(e:java.lang.Exception){
+//                e.printStackTrace()
+//            }
+//        }.start()
+//        if (message2=="nickname ok") {
+//            return true;
+//        }
+//        return false;
+//
+//    }
 }

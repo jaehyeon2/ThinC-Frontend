@@ -30,10 +30,10 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/emailArea"
+                android:id="@+id/idArea"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:hint="email"
+                android:hint="id"
                 style="@style/AuthEditText"
                 />
 
