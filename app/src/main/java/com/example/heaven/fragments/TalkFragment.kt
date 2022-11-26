@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.heaven.R
-import com.example.heaven.board.BoardMyActivity
+import com.example.heaven.board3.BoardMyActivity
 import com.example.heaven.board.BoardOneActivity
-import com.example.heaven.board.BoardTwoActivity
+import com.example.heaven.board2.BoardTwoActivity
 import com.example.heaven.databinding.FragmentTalkBinding
 
 

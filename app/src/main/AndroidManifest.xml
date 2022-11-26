@@ -12,8 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Heaven"
         android:usesCleartextTraffic="true">
-        <activity android:name=".board.BoardTwoActivity" />
-        <activity android:name=".board.BoardMyActivity" />
+        <activity android:name=".board3.BoardWrite3Activity" />
+        <activity android:name=".board3.BoardInside3Activity" />
+        <activity android:name=".board3.BoardEdit3Activity" />
+        <activity android:name=".board2.BoardWrite2Activity" />
+        <activity android:name=".board2.BoardInside2Activity" />
+        <activity android:name=".board2.BoardEdit2Activity" />
+        <activity android:name=".board2.BoardTwoActivity" />
+        <activity android:name=".board3.BoardMyActivity" />
         <activity android:name=".board.BoardOneActivity" />
         <activity android:name=".setting.SearchActivity" />
         <activity android:name=".setting.SettingActivity" />
