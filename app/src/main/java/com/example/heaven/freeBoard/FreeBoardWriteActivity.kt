@@ -1,4 +1,4 @@
-package com.example.heaven.freeBoard
+package com.example.heaven.board
 
 import android.content.Intent
 import android.graphics.Bitmap
@@ -10,25 +10,25 @@ import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.heaven.R
-import com.example.heaven.databinding.ActivityFreeBoardWriteBinding
+import com.example.heaven.databinding.ActivityBoardWriteBinding
 import com.example.heaven.utils.FBAuth
 import com.example.heaven.utils.FBRef
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
 
-class FreeBoardWriteActivity : AppCompatActivity() {
+class BoardWriteActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityFreeBoardWriteBinding
+    private lateinit var binding : ActivityBoardWriteBinding
 
-    private val TAG = FreeBoardWriteActivity::class.java.simpleName
+    private val TAG = BoardWriteActivity::class.java.simpleName
 
     private var isImageUpload = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_free_board_write)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_board_write)
 
         binding.writeBtn.setOnClickListener {
 
@@ -49,7 +49,7 @@ class FreeBoardWriteActivity : AppCompatActivity() {
 
             FBRef.boardRef
                 .child(key)
-                .setValue(FreeBoardModel(title, content, uid, time))
+                .setValue(BoardModel(title, content, uid, time))
 
             Toast.makeText(this, "게시글 입력 완료", Toast.LENGTH_LONG).show()
 
