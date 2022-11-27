@@ -84,57 +84,57 @@ class BookmarkFragment : Fragment() {
     private fun getCategoryData(){
 
         val postListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//
+//                for (dataModel in dataSnapshot.children) {
+//
+//                    Log.d(TAG, dataModel.toString())
+//                    val item = dataModel.getValue(ContentModel::class.java)
+//
+//                    // 3. 전체 컨텐츠 중에서, 사용자가 북마크한 정보만 보여줌!
+//                    if (bookmarkIdList.contains(dataModel.key.toString())){
+//                        items.add(item!!)
+//                        itemKeyList.add(dataModel.key.toString())
+//                    }
+//
+//
+//                }
+//                rvAdapter.notifyDataSetChanged()
+//
+//            }
 
-                for (dataModel in dataSnapshot.children) {
-
-                    Log.d(TAG, dataModel.toString())
-                    val item = dataModel.getValue(ContentModel::class.java)
-
-                    // 3. 전체 컨텐츠 중에서, 사용자가 북마크한 정보만 보여줌!
-                    if (bookmarkIdList.contains(dataModel.key.toString())){
-                        items.add(item!!)
-                        itemKeyList.add(dataModel.key.toString())
-                    }
-
-
-                }
-                rvAdapter.notifyDataSetChanged()
-
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
-                Log.w("ContentListActivity", "loadPost:onCancelled", databaseError.toException())
-            }
+//            override fun onCancelled(databaseError: DatabaseError) {
+//                // Getting Post failed, log a message
+//                Log.w("ContentListActivity", "loadPost:onCancelled", databaseError.toException())
+//            }
         }
-        FBRef.category1.addValueEventListener(postListener)
-        FBRef.category2.addValueEventListener(postListener)
+//        FBRef.category1.addValueEventListener(postListener)
+//        FBRef.category2.addValueEventListener(postListener)
 
     }
 
     private fun getBookmarkData(){
 
         val postListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                for (dataModel in dataSnapshot.children) {
-
-                    Log.e(TAG, dataModel.toString())
-                    bookmarkIdList.add(dataModel.key.toString())
-
-                }
-
-                // 1. 전체 카테고리에 있는 컨텐츠 데이터들을 다 가져옴!
-                getCategoryData()
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
-                Log.w("ContentListActivity", "loadPost:onCancelled", databaseError.toException())
-            }
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//
+//                for (dataModel in dataSnapshot.children) {
+//
+//                    Log.e(TAG, dataModel.toString())
+//                    bookmarkIdList.add(dataModel.key.toString())
+//
+//                }
+//
+//                // 1. 전체 카테고리에 있는 컨텐츠 데이터들을 다 가져옴!
+//                getCategoryData()
+//            }
+//
+//            override fun onCancelled(databaseError: DatabaseError) {
+//                // Getting Post failed, log a message
+//                Log.w("ContentListActivity", "loadPost:onCancelled", databaseError.toException())
+//            }
         }
-        FBRef.bookmarkRef.child(FBAuth.getUid()).addValueEventListener(postListener)
+//        FBRef.bookmarkRef.child(FBAuth.getUid()).addValueEventListener(postListener)
 
     }
 }

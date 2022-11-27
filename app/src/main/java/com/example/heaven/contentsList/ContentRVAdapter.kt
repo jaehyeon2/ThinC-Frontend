@@ -68,7 +68,7 @@ class ContentRVAdapter(val context : Context,
                 Log.d("ContentRVAdapter", FBAuth.getUid())
                 Toast.makeText(context, key, Toast.LENGTH_LONG).show()
 
-                login()
+                bookmarkCheck()
 
 //                if(bookmarkIdList.contains(key)) {
 //                    // 북마크가 있을 때 삭제
@@ -98,8 +98,8 @@ class ContentRVAdapter(val context : Context,
 
     }
 
-    private fun login() {
-        Log.w("login", "login process")
+    private fun bookmarkCheck() {
+        Log.w("bookmarkcheck", "bookmarkcheck")
         val url = URL("http://10.0.2.2:8080/recipe_bookmark?id=1")
         Thread{
             try{

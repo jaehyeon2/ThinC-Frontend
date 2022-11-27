@@ -45,7 +45,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun search() {
-        Log.w("login", "login process")
+        Log.w("search", "search process")
         var search = binding.searchArea.text.toString()
         val url = URL("http://10.0.2.2:8080/search?search=$search")
         Thread{
@@ -64,17 +64,7 @@ class SearchActivity : AppCompatActivity() {
                 }
 
                 Log.w("message", content.toString())
-                if (content.toString().equals("login success")){
-                    val intent = Intent(this, ContentListActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                } else{
-                    val handler = Handler(Looper.getMainLooper())
-                    handler.postDelayed(Runnable {
-                        Toast.makeText(this, "회원 정보가 일치하지 않습니다.", Toast.LENGTH_LONG).show()
-                    }, 0)
 
-                }
             }catch (e:Exception){
                 e.printStackTrace()
             }

@@ -21,18 +21,17 @@ class SettingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
 
-        auth = Firebase.auth
-
-//        val logoutBtn = findViewById<Button>(R.id.mypage3)
-        val logoutBtn : ImageView = findViewById(R.id.mypage3)
-        logoutBtn.setOnClickListener {
-
-            auth.signOut()
-
-            val intent = Intent(this, IntroActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-
+//        auth = Firebase.auth
+//
+//        val logoutBtn : ImageView = findViewById(R.id.mypage3)
+//        logoutBtn.setOnClickListener {
+//
+//            auth.signOut()
+//
+//            val intent = Intent(this, IntroActivity::class.java)
+//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//            startActivity(intent)
+//
         }
 
     }
