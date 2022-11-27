@@ -16,6 +16,7 @@ import com.example.heaven.comment.CommentModel
 import com.example.heaven.utils.FBAuth
 import com.example.heaven.utils.FBRef
 import com.bumptech.glide.Glide
+import com.example.heaven.board.FreeBoardEditActivity
 import com.example.heaven.databinding.ActivityFreeBoardInsideBinding
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.database.DataSnapshot

@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.databinding.DataBindingUtil
 import com.example.heaven.R
-import com.example.heaven.databinding.ActivityBoardOneBinding
+import com.example.heaven.databinding.ActivityFreeBoardBinding
+import com.example.heaven.freeBoard.FreeBoardListLVAdapter
+import com.example.heaven.freeBoard.FreeBoardModel
 import com.example.heaven.utils.FBRef
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -15,22 +17,22 @@ import com.google.firebase.database.ValueEventListener
 
 class BoardOneActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityBoardOneBinding
+    private lateinit var binding : ActivityFreeBoardBinding
 
-    private val boardDataList = mutableListOf<BoardModel>()
+    private val boardDataList = mutableListOf<FreeBoardModel>()
     private val boardKeyList = mutableListOf<String>()
 
     private val TAG = BoardOneActivity::class.java.simpleName
 
-    private lateinit var boardRVAdapter : BoardListLVAdapter
+    private lateinit var boardRVAdapter : FreeBoardListLVAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_board_one)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_free_board)
 
-        boardRVAdapter = BoardListLVAdapter(boardDataList)
+        boardRVAdapter = FreeBoardListLVAdapter(boardDataList)
         binding.boardListView.adapter = boardRVAdapter
 
 
@@ -43,7 +45,7 @@ class BoardOneActivity : AppCompatActivity() {
         }
 
         binding.writeBtn.setOnClickListener {
-            val intent = Intent(this, BoardWriteActivity::class.java)
+            val intent = Intent(this, FreeBoardWriteActivity::class.java)
             startActivity(intent)
         }
 
@@ -63,7 +65,7 @@ class BoardOneActivity : AppCompatActivity() {
                     Log.d(TAG, dataModel.toString())
 //                    dataModel.key
 
-                    val item = dataModel.getValue(BoardModel::class.java)
+                    val item = dataModel.getValue(FreeBoardModel::class.java)
                     boardDataList.add(item!!)
                     boardKeyList.add(dataModel.key.toString())
 

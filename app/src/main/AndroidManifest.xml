@@ -28,7 +28,7 @@
         <activity android:name=".setting.SettingActivity" />
         <activity android:name=".freeBoard.FreeBoardEditActivity" />
         <activity android:name=".freeBoard.FreeBoardInsideActivity" />
-        <activity android:name=".freeBoard.FreeBoardWriteActivity" />
+        <activity android:name=".freeBoard.FreeBoardW" />
         <activity android:name=".contentsList.ContentShowActivity" />
         <activity android:name=".contentsList.ContentListActivity" />
         <activity android:name=".auth.JoinActivity" />

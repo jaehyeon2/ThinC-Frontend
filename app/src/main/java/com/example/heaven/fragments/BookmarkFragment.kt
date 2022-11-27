@@ -83,7 +83,7 @@ class BookmarkFragment : Fragment() {
 
     private fun getCategoryData(){
 
-        val postListener = object : ValueEventListener {
+//        val postListener = object : ValueEventListener {
 //            override fun onDataChange(dataSnapshot: DataSnapshot) {
 //
 //                for (dataModel in dataSnapshot.children) {
@@ -115,7 +115,7 @@ class BookmarkFragment : Fragment() {
 
     private fun getBookmarkData(){
 
-        val postListener = object : ValueEventListener {
+//        val postListener = object : ValueEventListener {
 //            override fun onDataChange(dataSnapshot: DataSnapshot) {
 //
 //                for (dataModel in dataSnapshot.children) {
@@ -136,5 +136,5 @@ class BookmarkFragment : Fragment() {
         }
 //        FBRef.bookmarkRef.child(FBAuth.getUid()).addValueEventListener(postListener)
 
-    }
-}
+//    }
+//}

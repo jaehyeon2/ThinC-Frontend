@@ -52,7 +52,7 @@ class ContentListActivity : AppCompatActivity() {
 
         }
 
-        val postListener = object : ValueEventListener {
+//        val postListener = object : ValueEventListener {
 //            override fun onDataChange(dataSnapshot: DataSnapshot) {
 //
 //                for (dataModel in dataSnapshot.children) {
@@ -75,19 +75,19 @@ class ContentListActivity : AppCompatActivity() {
         }
 //        myRef.addValueEventListener(postListener)
 
-        val rv : RecyclerView = findViewById(R.id.rv)
-
-        rv.adapter = rvAdapter
-
-        rv.layoutManager = GridLayoutManager(this, 2)
-
-        getBookmarkData()
-    }
+//        val rv : RecyclerView = findViewById(R.id.rv)
+//
+//        rv.adapter = rvAdapter
+//
+//        rv.layoutManager = GridLayoutManager(this, 2)
+//
+//        getBookmarkData()
+//    }
 
 
     private fun getBookmarkData(){
 
-        val postListener = object : ValueEventListener {
+//        val postListener = object : ValueEventListener {
 //            override fun onDataChange(dataSnapshot: DataSnapshot) {
 //
 //                bookmarkIdList.clear()
@@ -111,12 +111,12 @@ class ContentListActivity : AppCompatActivity() {
 
 
 
-    }
+//    }
 
 
 
 
-}
+//}
 
 
 

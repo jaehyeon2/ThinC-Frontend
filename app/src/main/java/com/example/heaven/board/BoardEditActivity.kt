@@ -6,11 +6,13 @@ import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.heaven.R
-import com.example.heaven.databinding.ActivityBoardEditBinding
+
 import com.example.heaven.utils.FBAuth
 
 import com.example.heaven.utils.FBRef
 import com.bumptech.glide.Glide
+import com.example.heaven.databinding.ActivityFreeBoardEditBinding
+import com.example.heaven.freeBoard.FreeBoardModel
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -23,7 +25,7 @@ class BoardEditActivity : AppCompatActivity() {
 
     private lateinit var key:String
 
-    private lateinit var binding : ActivityBoardEditBinding
+    private lateinit var binding : ActivityFreeBoardEditBinding
 
     private val TAG = BoardEditActivity::class.java.simpleName
 
@@ -34,7 +36,7 @@ class BoardEditActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_board_edit)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_free_board_edit)
 
         key = intent.getStringExtra("key").toString()
         getBoardData(key)
@@ -52,7 +54,7 @@ class BoardEditActivity : AppCompatActivity() {
         FBRef.boardRef
             .child(key)
             .setValue(
-                BoardModel(binding.titleArea.text.toString(),
+                FreeBoardModel(binding.titleArea.text.toString(),
                     binding.contentArea.text.toString(),
                     writerUid,
                     FBAuth.getTime())
@@ -92,7 +94,7 @@ class BoardEditActivity : AppCompatActivity() {
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-                val dataModel = dataSnapshot.getValue(BoardModel::class.java)
+                val dataModel = dataSnapshot.getValue(FreeBoardModel::class.java)
 //                Log.d(TAG, dataModel.toString())
 //                Log.d(TAG, dataModel!!.title)
 //                Log.d(TAG, dataModel!!.time)

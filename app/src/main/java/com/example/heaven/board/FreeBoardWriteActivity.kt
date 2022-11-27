@@ -19,7 +19,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.heaven.R
-import com.example.heaven.databinding.ActivityBoardWriteBinding
+
 import com.example.heaven.utils.FBAuth
 import com.example.heaven.utils.FBRef
 import com.google.firebase.ktx.Firebase
@@ -29,6 +29,7 @@ import java.net.URL
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.core.app.ActivityCompat.startActivityForResult
 import com.example.heaven.MainActivity
+import com.example.heaven.databinding.ActivityFreeBoardWriteBinding
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonParser
 import kotlinx.coroutines.Dispatchers
@@ -36,9 +37,9 @@ import kotlinx.coroutines.withContext
 import java.io.*
 
 
-class BoardWriteActivity : AppCompatActivity() {
+class FreeBoardWriteActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityBoardWriteBinding
+    private lateinit var binding : ActivityFreeBoardWriteBinding
 
     private lateinit var profileImageBase64 : String
 
@@ -47,7 +48,7 @@ class BoardWriteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_board_write)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_free_board_write)
         binding.imageArea.setOnClickListener {
                 /** 이미지 추가 버튼  */
             openGallery()

@@ -13,10 +13,11 @@ import androidx.databinding.DataBindingUtil
 import com.example.heaven.R
 import com.example.heaven.comment.CommentLVAdapter
 import com.example.heaven.comment.CommentModel
-import com.example.heaven.databinding.ActivityBoardInsideBinding
 import com.example.heaven.utils.FBAuth
 import com.example.heaven.utils.FBRef
 import com.bumptech.glide.Glide
+import com.example.heaven.databinding.ActivityFreeBoardInsideBinding
+import com.example.heaven.freeBoard.FreeBoardModel
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -29,7 +30,7 @@ class BoardInsideActivity : AppCompatActivity() {
 
     private val TAG = BoardInsideActivity::class.java.simpleName
 
-    private lateinit var binding : ActivityBoardInsideBinding
+    private lateinit var binding : ActivityFreeBoardInsideBinding
 
     private lateinit var key:String
 
@@ -41,7 +42,7 @@ class BoardInsideActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_board_inside)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_free_board_inside)
 
         binding.boardSettingIcon.setOnClickListener {
             showDialog()
@@ -174,7 +175,7 @@ class BoardInsideActivity : AppCompatActivity() {
 
                 try {
 
-                    val dataModel = dataSnapshot.getValue(BoardModel::class.java)
+                    val dataModel = dataSnapshot.getValue(FreeBoardModel::class.java)
                     Log.d(TAG, dataModel!!.title)
 
                     binding.titleArea.text = dataModel!!.title

@@ -9,6 +9,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.heaven.R
+import com.example.heaven.board.FreeBoardWriteActivity
 import com.example.heaven.databinding.ActivityFreeBoardBinding
 import com.example.heaven.recipeBoard.RecipeBoardInsideActivity
 import com.example.heaven.utils.FBRef
