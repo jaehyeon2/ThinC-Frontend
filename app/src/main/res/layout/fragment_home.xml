@@ -21,6 +21,7 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/connectArea"
                     android:src="@drawable/home1"
                     android:layout_width="match_parent"
                     android:layout_height="490dp"/>

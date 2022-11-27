@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.heaven.R
-import com.example.heaven.board3.BoardMyActivity
-import com.example.heaven.board.BoardOneActivity
-import com.example.heaven.board2.BoardTwoActivity
+import com.example.heaven.myrecipeboard.MyrecipeBoardActivity
+import com.example.heaven.freeBoard.FreeBoardActivity
+import com.example.heaven.recipeBoard.RecipeBoardActivity
 import com.example.heaven.databinding.FragmentTalkBinding
 
 
@@ -33,17 +33,17 @@ class TalkFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_talk, container, false)
 
         binding.talk1.setOnClickListener {
-            val intent = Intent(context, BoardOneActivity::class.java)
+            val intent = Intent(context, FreeBoardActivity::class.java)
             startActivity(intent)
         }
 
         binding.talk2.setOnClickListener {
-            val intent = Intent(context, BoardTwoActivity::class.java)
+            val intent = Intent(context, RecipeBoardActivity::class.java)
             startActivity(intent)
         }
 
         binding.talk3.setOnClickListener {
-            val intent = Intent(context, BoardMyActivity::class.java)
+            val intent = Intent(context, MyrecipeBoardActivity::class.java)
             startActivity(intent)
         }
 

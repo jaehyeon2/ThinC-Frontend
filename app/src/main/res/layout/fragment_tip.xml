@@ -57,6 +57,7 @@
 
                     <TextView
                         android:text="전체"
+                        android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -64,6 +65,7 @@
 
                     <TextView
                         android:text="반찬"
+                        android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -71,6 +73,7 @@
 
                     <TextView
                         android:text="찌개"
+                        android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -109,6 +112,7 @@
 
                     <TextView
                         android:text="디저트"
+                        android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -116,6 +120,7 @@
 
                     <TextView
                         android:text="밑반찬"
+                        android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -123,6 +128,7 @@
 
                     <TextView
                         android:text=" 국물 "
+                        android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -160,6 +166,7 @@
 
                     <TextView
                         android:text="빵"
+                        android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -167,6 +174,7 @@
 
                     <TextView
                         android:text="샐러드"
+                        android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -181,6 +189,17 @@
 
                 </LinearLayout>
 
+                <TextView
+                    android:text=""
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:gravity="center"/>
+
+                <ImageView
+                    android:id="@+id/tip1"
+                    android:src="@drawable/tip1"
+                    android:layout_width="match_parent"
+                    android:layout_height="91dp"/>
 
             </LinearLayout>
 

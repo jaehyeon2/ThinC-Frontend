@@ -11,16 +11,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.heaven.R
 import com.example.heaven.utils.FBAuth
 import com.example.heaven.utils.FBRef
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
+//import com.google.firebase.database.DataSnapshot
+//import com.google.firebase.database.DatabaseError
+//import com.google.firebase.database.DatabaseReference
+//import com.google.firebase.database.ValueEventListener
+//import com.google.firebase.database.ktx.database
+//import com.google.firebase.ktx.Firebase
 
 class ContentListActivity : AppCompatActivity() {
 
-    lateinit var myRef : DatabaseReference
+//    lateinit var myRef : DatabaseReference
 
     val bookmarkIdList = mutableListOf<String>()
 
@@ -37,43 +37,43 @@ class ContentListActivity : AppCompatActivity() {
         rvAdapter = ContentRVAdapter(baseContext, items, itemKeyList, bookmarkIdList)
 
         // Write a message to the database
-        val database = Firebase.database
+//        val database = Firebase.database
 
         val category = intent.getStringExtra("category")
 
 
         if(category == "category1") {
 
-            myRef = database.getReference("contents")
+//            myRef = database.getReference("contents")
 
         } else if(category == "category2") {
 
-            myRef = database.getReference("contents2")
+//            myRef = database.getReference("contents2")
 
         }
 
         val postListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//
+//                for (dataModel in dataSnapshot.children) {
+//                    Log.d("ContentListActivity", dataModel.toString())
+//                    Log.d("ContentListActivity", dataModel.key.toString())
+//                    val item = dataModel.getValue(ContentModel::class.java)
+//                    items.add(item!!)
+//                    itemKeyList.add(dataModel.key.toString())
+//
+//                }
+//                rvAdapter.notifyDataSetChanged()
+//                Log.d("ContentListActivity", items.toString())
+//
+//            }
 
-                for (dataModel in dataSnapshot.children) {
-                    Log.d("ContentListActivity", dataModel.toString())
-                    Log.d("ContentListActivity", dataModel.key.toString())
-                    val item = dataModel.getValue(ContentModel::class.java)
-                    items.add(item!!)
-                    itemKeyList.add(dataModel.key.toString())
-
-                }
-                rvAdapter.notifyDataSetChanged()
-                Log.d("ContentListActivity", items.toString())
-
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
-                Log.w("ContentListActivity", "loadPost:onCancelled", databaseError.toException())
-            }
+//            override fun onCancelled(databaseError: DatabaseError) {
+//                // Getting Post failed, log a message
+//                Log.w("ContentListActivity", "loadPost:onCancelled", databaseError.toException())
+//            }
         }
-        myRef.addValueEventListener(postListener)
+//        myRef.addValueEventListener(postListener)
 
         val rv : RecyclerView = findViewById(R.id.rv)
 
@@ -88,26 +88,26 @@ class ContentListActivity : AppCompatActivity() {
     private fun getBookmarkData(){
 
         val postListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                bookmarkIdList.clear()
-
-                for (dataModel in dataSnapshot.children) {
-                    bookmarkIdList.add(dataModel.key.toString())
-                }
-                Log.d("Bookmark : ", bookmarkIdList.toString())
-                rvAdapter.notifyDataSetChanged()
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//
+//                bookmarkIdList.clear()
+//
+//                for (dataModel in dataSnapshot.children) {
+//                    bookmarkIdList.add(dataModel.key.toString())
+//                }
+//                Log.d("Bookmark : ", bookmarkIdList.toString())
+//                rvAdapter.notifyDataSetChanged()
 
 
 
             }
 
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
-                Log.w("ContentListActivity", "loadPost:onCancelled", databaseError.toException())
-            }
+//            override fun onCancelled(databaseError: DatabaseError) {
+//                // Getting Post failed, log a message
+//                Log.w("ContentListActivity", "loadPost:onCancelled", databaseError.toException())
+//            }
         }
-        FBRef.bookmarkRef.child(FBAuth.getUid()).addValueEventListener(postListener)
+//        FBRef.bookmarkRef.child(FBAuth.getUid()).addValueEventListener(postListener)
 
 
 
@@ -119,6 +119,9 @@ class ContentListActivity : AppCompatActivity() {
 }
 
 
+
+
+//  레시피 데이터 수동 추가 방법
 //        val myRef = database.getReference("contents")
 //        myRef.push().setValue(ContentModel("title1", "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FblYPPY%2Fbtq66v0S4wu%2FRmuhpkXUO4FOcrlOmVG4G1%2Fimg.png", "https://philosopher-chan.tistory.com/1235?category=941578"))
 //        myRef.push().setValue(ContentModel("title2", "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FznKK4%2Fbtq665AUWem%2FRUawPn5Wwb4cQ8BetEwN40%2Fimg.png", "https://philosopher-chan.tistory.com/1236?category=941578"))
