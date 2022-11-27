@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".contentsList.ContentListActivity">
+    tools:context=".HistoryActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topBar"
@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="레  시  피"
+            android:text="A I 레 시 피   사 용 기 록"
             android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="#fff"

@@ -12,6 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Heaven"
         android:usesCleartextTraffic="true">
+        <activity android:name=".HistoryActivity" />
+        <activity android:name=".setting.ConnectActivity" />
         <activity android:name=".board3.BoardWrite3Activity" />
         <activity android:name=".board3.BoardInside3Activity" />
         <activity android:name=".board3.BoardEdit3Activity" />

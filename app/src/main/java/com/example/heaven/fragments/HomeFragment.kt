@@ -1,5 +1,6 @@
 package com.example.heaven.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,9 +12,11 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.heaven.R
+import com.example.heaven.board.BoardOneActivity
 import com.example.heaven.contentsList.BookmarkRVAdapter
 import com.example.heaven.contentsList.ContentModel
 import com.example.heaven.databinding.FragmentHomeBinding
+import com.example.heaven.setting.ConnectActivity
 import com.example.heaven.utils.FBRef
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -46,7 +49,10 @@ class HomeFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
-
+        binding.connectArea.setOnClickListener {
+            val intent = Intent(context, ConnectActivity::class.java)
+            startActivity(intent)
+        }
 
         binding.tipTap.setOnClickListener {
             Log.d("HomeFragment", "tipTap")

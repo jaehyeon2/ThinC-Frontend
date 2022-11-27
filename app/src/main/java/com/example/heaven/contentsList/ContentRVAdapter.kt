@@ -14,12 +14,18 @@ import com.bumptech.glide.Glide
 import com.example.heaven.R
 import com.example.heaven.utils.FBAuth
 import com.example.heaven.utils.FBRef
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
+import java.net.URL
 
 class ContentRVAdapter(val context : Context,
                        val items : ArrayList<ContentModel>,
                        val keyList : ArrayList<String>,
                        val bookmarkIdList : MutableList<String>)
     : RecyclerView.Adapter<ContentRVAdapter.Viewholder>() {
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContentRVAdapter.Viewholder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.content_rv_item, parent, false)
@@ -62,21 +68,23 @@ class ContentRVAdapter(val context : Context,
                 Log.d("ContentRVAdapter", FBAuth.getUid())
                 Toast.makeText(context, key, Toast.LENGTH_LONG).show()
 
-                if(bookmarkIdList.contains(key)) {
-                    // 북마크가 있을 때 삭제
-                    FBRef.bookmarkRef
-                        .child(FBAuth.getUid())
-                        .child(key)
-                        .removeValue()
+                login()
 
-                } else {
-                    // 북마크가 없을 때
-                    FBRef.bookmarkRef
-                        .child(FBAuth.getUid())
-                        .child(key)
-                        .setValue(BookmarkModel(true))
-
-                }
+//                if(bookmarkIdList.contains(key)) {
+//                    // 북마크가 있을 때 삭제
+//                    FBRef.bookmarkRef
+//                        .child(FBAuth.getUid())
+//                        .child(key)
+//                        .removeValue()
+//
+//                } else {
+//                    // 북마크가 없을 때
+//                    FBRef.bookmarkRef
+//                        .child(FBAuth.getUid())
+//                        .child(key)
+//                        .setValue(BookmarkModel(true))
+//
+//                }
 
             }
 
@@ -87,6 +95,33 @@ class ContentRVAdapter(val context : Context,
                 .into(imageViewArea)
 
         }
+
+    }
+
+    private fun login() {
+        Log.w("login", "login process")
+        val url = URL("http://10.0.2.2:8080/recipe_bookmark?id=1")
+        Thread{
+            try{
+                Log.w("connect", "success")
+
+                val connection = url.openConnection() as HttpURLConnection
+
+                val streamReader = InputStreamReader(connection.inputStream)
+                val buffered = BufferedReader(streamReader)
+
+                val content = StringBuilder()
+                while (true) {
+                    val data = buffered.readLine() ?: break
+                    content.append(data)
+                }
+
+                Log.w("message", content.toString())
+
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+        }.start()
 
     }
 

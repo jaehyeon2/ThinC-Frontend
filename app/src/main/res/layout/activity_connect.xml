@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".contentsList.ContentListActivity">
+    tools:context=".setting.SettingActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topBar"
@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="레  시  피"
+            android:text="가 전 제 품   연 동 하 기"
             android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="#fff"
@@ -29,10 +29,16 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv"
-        android:layout_marginTop="80dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="409dp"
+        android:layout_height="669dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topBar" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
