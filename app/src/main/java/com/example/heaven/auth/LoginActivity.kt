@@ -13,8 +13,7 @@ import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 import android.os.Looper
-
-
+import java.net.CookieManager
 
 
 class LoginActivity : AppCompatActivity() {
@@ -51,15 +50,17 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 Log.w("message", content.toString())
-                if (content.toString().equals("login success")){
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                } else{
+                if(content.toString().equals("no member")){
                     val handler = Handler(Looper.getMainLooper())
                     handler.postDelayed(Runnable {
                         Toast.makeText(this, "회원 정보가 일치하지 않습니다.", Toast.LENGTH_LONG).show()
                     }, 0)
+                } else{
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("nick", content.toString())
+                    startActivity(intent)
+                    finish()
+
 
                 }
             }catch (e:Exception){
