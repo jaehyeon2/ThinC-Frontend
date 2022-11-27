@@ -49,6 +49,8 @@ class LoginActivity : AppCompatActivity() {
                     content.append(data)
                 }
 
+
+
                 Log.w("message", content.toString())
                 if(content.toString().equals("no member")){
                     val handler = Handler(Looper.getMainLooper())
