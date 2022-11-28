@@ -30,8 +30,6 @@ import java.net.URL
 
 class MyrecipeBoardInsideActivity : AppCompatActivity() {
 
-    private val TAG = MyrecipeBoardInsideActivity::class.java.simpleName
-
     private lateinit var binding : ActivityMyrecipeBoardInsideBinding
 
     private lateinit var key:String

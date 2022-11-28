@@ -1,111 +1,124 @@
 package com.example.heaven.myrecipeboard
 
+import android.app.Activity
+import android.content.Intent
+import android.content.res.Resources
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Base64
 import android.util.Log
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.heaven.R
-import com.example.heaven.utils.FBAuth
-
-import com.example.heaven.utils.FBRef
-import com.bumptech.glide.Glide
 import com.example.heaven.databinding.ActivityMyrecipeBoardEditBinding
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
+import java.io.*
+import java.net.HttpURLConnection
+import java.net.URL
 
 class MyrecipeBoardEditActivity : AppCompatActivity() {
 
-    private lateinit var key:String
-
     private lateinit var binding : ActivityMyrecipeBoardEditBinding
 
-    private val TAG = MyrecipeBoardEditActivity::class.java.simpleName
+    private lateinit var profileImageBase64:String
 
-    private lateinit var writerUid : String
+    private var isImageUpload = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_myrecipe_board_edit)
-
-        key = intent.getStringExtra("key").toString()
-        getBoard3Data(key)
-        getImage3Data(key)
-
+        binding.imageArea.setOnClickListener {
+            /** 이미지 추가 버튼  */
+            openGallery()
+            isImageUpload = true
+        }
         binding.editBtn.setOnClickListener {
-            editBoard3Data(key)
+
+            editRecipe()
+            Toast.makeText(this, "게시글 입력 완료", Toast.LENGTH_LONG).show()
+            finish()
+
         }
 
-
     }
 
-    private fun editBoard3Data(key : String){
+    private fun openGallery(){
+        val intent = Intent(Intent.ACTION_PICK)
 
-//        FBRef.boardRef3
-//            .child(key)
-//            .setValue(
-//                MyrecipeBoardModel(binding.titleArea.text.toString(),
-//                    binding.contentArea.text.toString(),
-//                    writerUid,
-//                    FBAuth.getTime())
-//            )
-
-        Toast.makeText(this, "수정완료", Toast.LENGTH_LONG).show()
-
-        finish()
-
+        intent.type = MediaStore.Images.Media.CONTENT_TYPE
+        intent.type = "image/*"
+        startActivityForResult(intent, 102)
     }
 
-    private fun getImage3Data(key : String){
+    private fun editRecipe(){
+        val title = binding.titleArea.text.toString()
+        val content = binding.contentArea.text.toString()
+//        val category = binding.categoryArea.text.toString()
 
-        // Reference to an image file in Cloud Storage
-//        val storageReference = Firebase.storage.reference.child(key + ".png")
-//
-//        // ImageView in your Activity
-//        val imageViewFromFB = binding.imageArea
-//
-//        storageReference.downloadUrl.addOnCompleteListener(OnCompleteListener { task ->
-//            if(task.isSuccessful) {
-//
-//                Glide.with(this)
-//                    .load(task.result)
-//                    .into(imageViewFromFB)
-//
-//            } else {
-//
-//            }
-//        })
+        val url = URL("http://10.0.2.2:8080/write-post")
+        val connection = url.openConnection() as HttpURLConnection
 
+        connection.requestMethod = "POST"
+        connection.setRequestProperty("Content-Type", "application/json")
+        connection.setRequestProperty("Accept", "application/json")
+        connection.doInput = true
+        connection.doOutput = true
 
+        val jsonString = "{\"title\":$title, \"content\":$content, \"image\":$profileImageBase64}"
+
+        // Send the JSON we created
+        val outputStreamWriter = OutputStreamWriter(connection.outputStream)
+        outputStreamWriter.write(jsonString)
+        outputStreamWriter.flush()
+
+        val streamReader = InputStreamReader(connection.inputStream)
+        val buffered = BufferedReader(streamReader)
+
+        val responseJson = StringBuilder()
+        while (true) {
+            val data = buffered.readLine() ?: break
+            responseJson.append(data)
+        }
+
+        Log.w("json", responseJson.toString())
     }
 
-    private fun getBoard3Data(key : String) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
+        super.onActivityResult(requestCode, resultCode, intent)
 
-//        val postListener = object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//
-//                val dataModel = dataSnapshot.getValue(MyrecipeBoardModel::class.java)
-//
-//                binding.titleArea.setText(dataModel?.title)
-//                binding.contentArea.setText(dataModel?.content)
-//                writerUid = dataModel!!.uid
-//
-//            }
-//
-//            override fun onCancelled(databaseError: DatabaseError) {
-//                // Getting Post failed, log a message
-//                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
-//            }
-//        }
-//
-//        FBRef.boardRef3.child(key).addValueEventListener(postListener)
+        if (requestCode == 102 && resultCode == Activity.RESULT_OK){
+            var currentImageURL = intent?.data
+            // Base64 인코딩부분
+            val ins: InputStream? = currentImageURL?.let {
+                applicationContext.contentResolver.openInputStream(
+                    it
+                )
+            }
+            val img: Bitmap = BitmapFactory.decodeStream(ins)
+            ins?.close()
+            val resized = Bitmap.createScaledBitmap(img, 256, 256, true)
+            val byteArrayOutputStream = ByteArrayOutputStream()
+            resized.compress(Bitmap.CompressFormat.JPEG, 60, byteArrayOutputStream)
+            val byteArray: ByteArray = byteArrayOutputStream.toByteArray()
+            val outStream = ByteArrayOutputStream()
+            val res: Resources = resources
+            profileImageBase64 = Base64.encodeToString(byteArray, Base64.NO_WRAP)
+            // 여기까지 인코딩 끝
 
+            // 이미지 뷰에 선택한 이미지 출력
+            val imageview: ImageView = findViewById(binding.imageArea.id)
+            imageview.setImageURI(currentImageURL)
+            try {
+                //이미지 선택 후 처리
+            }catch (e: Exception){
+                e.printStackTrace()
+            }
+        } else{
+            Log.d("ActivityResult", "something wrong")
+        }
     }
 }
