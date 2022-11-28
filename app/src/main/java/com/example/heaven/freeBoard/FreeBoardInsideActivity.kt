@@ -32,11 +32,7 @@ import java.net.URL
 
 class FreeBoardInsideActivity : AppCompatActivity() {
 
-    private val TAG = FreeBoardInsideActivity::class.java.simpleName
-
     private lateinit var binding : ActivityFreeBoardInsideBinding
-
-    private lateinit var key:String
 
     private val commentDataList = mutableListOf<CommentModel>()
 
@@ -54,70 +50,8 @@ class FreeBoardInsideActivity : AppCompatActivity() {
             showDia(id)
         }
 
-        // 두번째 방법
-        key = intent.getStringExtra("key").toString()
-        getBoardData(key)
-        getImageData(key)
-
-
-        binding.commentBtn.setOnClickListener {
-            insertComment(key)
-        }
-
-        getCommentData(key)
-
         commentAdapter = CommentLVAdapter(commentDataList)
         binding.commentLV.adapter = commentAdapter
-
-    }
-
-    fun getCommentData(key : String){
-
-//        val postListener = object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//
-//                commentDataList.clear()
-//
-//                for (dataModel in dataSnapshot.children) {
-//
-//                    val item = dataModel.getValue(CommentModel::class.java)
-//                    commentDataList.add(item!!)
-//                }
-//
-//                commentAdapter.notifyDataSetChanged()
-//
-//
-//            }
-//
-//            override fun onCancelled(databaseError: DatabaseError) {
-//                // Getting Post failed, log a message
-//                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
-//            }
-//        }
-//        FBRef.commentRef.child(key).addValueEventListener(postListener)
-
-
-    }
-
-    fun insertComment(key : String){
-        // comment
-        //   - BoardKey
-        //        - CommentKey
-        //            - CommentData
-        //            - CommentData
-        //            - CommentData
-//        FBRef.commentRef
-//            .child(key)
-//            .push()
-//            .setValue(
-//                CommentModel(
-//                    binding.commentArea.text.toString(),
-//                    FBAuth.getTime()
-//                )
-//            )
-
-        Toast.makeText(this, "댓글 입력 완료", Toast.LENGTH_SHORT).show()
-        binding.commentArea.setText("")
 
     }
 
@@ -133,24 +67,17 @@ class FreeBoardInsideActivity : AppCompatActivity() {
             Toast.makeText(this, "수정 버튼을 눌렀습니다", Toast.LENGTH_LONG).show()
 
             val intent = Intent(this, FreeBoardEditActivity::class.java)
-            intent.putExtra("key",key)
+            intent.putExtra("id",id)
             startActivity(intent)
         }
 
         alertDialog.findViewById<Button>(R.id.removeBtn)?.setOnClickListener {
 
-
             deletePost(id)
-//            FBRef.boardRef.child(key).removeValue()
             Toast.makeText(this, "삭제완료", Toast.LENGTH_LONG).show()
             finish()
-
         }
-
-
-
     }
-
 
     private fun deletePost(id:Long){
         val url = URL("http://10.0.2.2:8080/delete-free-post?id=$id")
@@ -175,69 +102,6 @@ class FreeBoardInsideActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
         }.start()
-    }
-
-    private fun getImageData(key : String){
-
-//        // Reference to an image file in Cloud Storage
-//        val storageReference = Firebase.storage.reference.child(key + ".png")
-//
-//        // ImageView in your Activity
-//        val imageViewFromFB = binding.getImageArea
-//
-//        storageReference.downloadUrl.addOnCompleteListener(OnCompleteListener { task ->
-//            if(task.isSuccessful) {
-//
-//                Glide.with(this)
-//                    .load(task.result)
-//                    .into(imageViewFromFB)
-//
-//            } else {
-//
-//                binding.getImageArea.isVisible = false
-//            }
-//        })
-
-
-    }
-
-
-    private fun getBoardData(key : String){
-
-//        val postListener = object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//
-//                try {
-//
-//                    val dataModel = dataSnapshot.getValue(FreeBoardModel::class.java)
-//                    Log.d(TAG, dataModel!!.title)
-//
-//                    binding.titleArea.text = dataModel!!.title
-//                    binding.textArea.text = dataModel!!.content
-//                    binding.timeArea.text = dataModel!!.time
-//
-//                    val myUid = FBAuth.getUid()
-//                    val writerUid = dataModel.uid
-//
-//                    if(myUid.equals(writerUid)){
-//                        Log.d(TAG, "내가 쓴 글")
-//                        binding.boardSettingIcon.isVisible = true
-//                    } else {
-//                        Log.d(TAG, "내가 쓴 글 아님")
-//                    }
-//
-//                } catch (e : Exception){
-//
-//                    Log.d(TAG, "삭제완료")
-//                }
-//            }
-//
-//            override fun onCancelled(databaseError: DatabaseError) {
-//                // Getting Post failed, log a message
-//                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
-//            }
-//        }
-//        FBRef.boardRef.child(key).addValueEventListener(postListener)
     }
 
 }

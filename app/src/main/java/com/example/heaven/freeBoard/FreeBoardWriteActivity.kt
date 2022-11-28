@@ -1,28 +1,47 @@
-package com.example.heaven.board
+package com.example.heaven.freeBoard
 
+import android.app.Activity
 import android.content.Intent
+import android.content.res.Resources
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.MediaStore
+import android.util.Base64
+import android.util.Base64.NO_WRAP
 import android.util.Log
+import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.heaven.R
-import com.example.heaven.databinding.ActivityFreeBoardWriteBinding
-import com.example.heaven.freeBoard.FreeBoardModel
+
 import com.example.heaven.utils.FBAuth
 import com.example.heaven.utils.FBRef
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import java.io.ByteArrayOutputStream
+import java.net.HttpURLConnection
+import java.net.URL
+import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.core.app.ActivityCompat.startActivityForResult
+import com.example.heaven.MainActivity
+import com.example.heaven.databinding.ActivityFreeBoardWriteBinding
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonParser
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.io.*
 
-class BoardWriteActivity : AppCompatActivity() {
+
+class FreeBoardWriteActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityFreeBoardWriteBinding
 
-    private val TAG = FreeBoardWriteActivity::class.java.simpleName
+    private lateinit var profileImageBase64 : String
 
     private var isImageUpload = false
 
@@ -30,79 +49,93 @@ class BoardWriteActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_free_board_write)
-
-        binding.writeBtn.setOnClickListener {
-
-            val title = binding.titleArea.text.toString()
-            val content = binding.contentArea.text.toString()
-            val uid = FBAuth.getUid()
-            val time = FBAuth.getTime()
-
-            Log.d(TAG, title)
-            Log.d(TAG, content)
-
-            // 파이어베이스 store에 이미지를 저장하고 싶습니다
-            // 만약에 내가 게시글을 클릭했을 때, 게시글에 대한 정보를 받아와야 하는데
-            // 이미지 이름에 대한 정보를 모르기 때문에
-            // 이미지 이름을 문서의 key값으로 해줘서 이미지에 대한 정보를 찾기 쉽게 해놓음.
-
-            val key = FBRef.boardRef.push().key.toString()
-
-            FBRef.boardRef
-                .child(key)
-                .setValue(FreeBoardModel(title, content, uid, time))
-
-            Toast.makeText(this, "게시글 입력 완료", Toast.LENGTH_LONG).show()
-
-            if(isImageUpload == true) {
-                imageUpload(key)
-            }
-
-            finish()
-
-
-        }
-
         binding.imageArea.setOnClickListener {
-            val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
-            startActivityForResult(gallery, 100)
+            /** 이미지 추가 버튼  */
+            openGallery()
             isImageUpload = true
         }
+        binding.writeBtn.setOnClickListener {
 
-    }
+            writePost()
+            Toast.makeText(this, "게시글 입력 완료", Toast.LENGTH_LONG).show()
+            finish()
 
-    private fun imageUpload(key : String){
-        // Get the data from an ImageView as bytes
-
-        val storage = Firebase.storage
-        val storageRef = storage.reference
-        val mountainsRef = storageRef.child(key + ".png")
-
-        val imageView = binding.imageArea
-        imageView.isDrawingCacheEnabled = true
-        imageView.buildDrawingCache()
-        val bitmap = (imageView.drawable as BitmapDrawable).bitmap
-        val baos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-        val data = baos.toByteArray()
-
-        var uploadTask = mountainsRef.putBytes(data)
-        uploadTask.addOnFailureListener {
-            // Handle unsuccessful uploads
-        }.addOnSuccessListener { taskSnapshot ->
-            // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
-            // ...
         }
 
     }
 
+    private fun openGallery(){
+        val intent = Intent(Intent.ACTION_PICK)
 
+        intent.type = MediaStore.Images.Media.CONTENT_TYPE
+        intent.type = "image/*"
+        startActivityForResult(intent, 102)
+    }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if(resultCode == RESULT_OK && requestCode == 100) {
-            binding.imageArea.setImageURI(data?.data)
+    private fun writePost(){
+        val title = binding.titleArea.text.toString()
+        val content = binding.contentArea.text.toString()
+
+        val url = URL("http://10.0.2.2:8080/write-post")
+        val connection = url.openConnection() as HttpURLConnection
+
+        connection.requestMethod = "POST"
+        connection.setRequestProperty("Content-Type", "application/json")
+        connection.setRequestProperty("Accept", "application/json")
+        connection.doInput = true
+        connection.doOutput = true
+
+        val jsonString = "{\"title\":$title, \"content\":$content, \"image\":$profileImageBase64}"
+
+        // Send the JSON we created
+        val outputStreamWriter = OutputStreamWriter(connection.outputStream)
+        outputStreamWriter.write(jsonString)
+        outputStreamWriter.flush()
+
+        val streamReader = InputStreamReader(connection.inputStream)
+        val buffered = BufferedReader(streamReader)
+
+        val responseJson = StringBuilder()
+        while (true) {
+            val data = buffered.readLine() ?: break
+            responseJson.append(data)
         }
 
+        Log.w("json", responseJson.toString())
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
+        super.onActivityResult(requestCode, resultCode, intent)
+
+        if (requestCode == 102 && resultCode == Activity.RESULT_OK){
+            var currentImageURL = intent?.data
+            // Base64 인코딩부분
+            val ins: InputStream? = currentImageURL?.let {
+                applicationContext.contentResolver.openInputStream(
+                    it
+                )
+            }
+            val img: Bitmap = BitmapFactory.decodeStream(ins)
+            ins?.close()
+            val resized = Bitmap.createScaledBitmap(img, 256, 256, true)
+            val byteArrayOutputStream = ByteArrayOutputStream()
+            resized.compress(Bitmap.CompressFormat.JPEG, 60, byteArrayOutputStream)
+            val byteArray: ByteArray = byteArrayOutputStream.toByteArray()
+            val outStream = ByteArrayOutputStream()
+            val res: Resources = resources
+            profileImageBase64 = Base64.encodeToString(byteArray, NO_WRAP)
+            // 여기까지 인코딩 끝
+
+            // 이미지 뷰에 선택한 이미지 출력
+            val imageview: ImageView = findViewById(binding.imageArea.id)
+            imageview.setImageURI(currentImageURL)
+            try {
+                //이미지 선택 후 처리
+            }catch (e: Exception){
+                e.printStackTrace()
+            }
+        } else{
+            Log.d("ActivityResult", "something wrong")
+        }
     }
 }

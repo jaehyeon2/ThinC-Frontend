@@ -1,6 +1,5 @@
 package com.example.heaven.freeBoard
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +7,6 @@ import android.widget.BaseAdapter
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.heaven.R
-import com.example.heaven.utils.FBAuth
 
 class FreeBoardListLVAdapter(val boardList : MutableList<FreeBoardModel>) : BaseAdapter() {
 
@@ -32,7 +30,7 @@ class FreeBoardListLVAdapter(val boardList : MutableList<FreeBoardModel>) : Base
 
         val itemLinearLayoutView = view?.findViewById<LinearLayout>(R.id.itemView)
         val title = view?.findViewById<TextView>(R.id.titleArea)
-        val content = view?.findViewById<TextView>(R.id.contentArea)
+        val content = view?.findViewById<TextView>(R.id.integrateArea)
         val time = view?.findViewById<TextView>(R.id.timeArea)
 
 //        if(boardList[position].uid.equals(FBAuth.getUid())) {
