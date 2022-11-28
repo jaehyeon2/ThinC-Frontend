@@ -22,9 +22,6 @@ class JoinActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(bindingJoin.root)
 
-//        bindingJoin.checkNick.setOnClickListener{
-//            checkNick = checkNickname()
-//        }
         bindingJoin.joinBtn.setOnClickListener {
 
             join()
@@ -113,31 +110,4 @@ class JoinActivity : AppCompatActivity() {
             }
         }.start()
     }
-//    private fun checkNickname():Boolean{
-//        var message2 = "null"
-//        Thread{
-//            try{
-//                val nickname = bindingJoin.nicknameArea.text.toString()
-//                val url = URL("http://10.0.2.2:8080/checknick?nick=$nickname")
-//                val connection = url.openConnection() as HttpURLConnection
-//
-//                val message = BufferedReader(InputStreamReader(connection.getInputStream())).use { inp ->
-//                    var line: String?
-//                    while (inp.readLine().also { line = it } != null){
-//                        println(line)
-//                    }
-//                }
-//                message2 = message.toString()
-//
-//
-//            }catch(e:java.lang.Exception){
-//                e.printStackTrace()
-//            }
-//        }.start()
-//        if (message2=="nickname ok") {
-//            return true;
-//        }
-//        return false;
-//
-//    }
 }

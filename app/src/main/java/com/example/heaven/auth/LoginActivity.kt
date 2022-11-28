@@ -13,7 +13,6 @@ import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 import android.os.Looper
-import java.net.CookieManager
 
 
 class LoginActivity : AppCompatActivity() {
@@ -62,56 +61,10 @@ class LoginActivity : AppCompatActivity() {
                     intent.putExtra("nick", content.toString())
                     startActivity(intent)
                     finish()
-
-
                 }
             }catch (e:Exception){
                 e.printStackTrace()
             }
         }.start()
-
     }
-
-
 }
-
-
-
-////    private lateinit var auth: FirebaseAuth
-//
-//    val binding by lazy {Ac}
-////    private lateinit var binding: ActivityLoginBinding
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//
-//        super.onCreate(savedInstanceState)
-//
-////        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
-//
-//
-//
-//        binding.loginBtn.setOnClickListener {
-//
-//            val email = binding.emailArea.text.toString()
-//            val password = binding.passwordArea.text.toString()
-////            auth.signInWithEmailAndPassword(email, password)
-////                .addOnCompleteListener(this) { task ->
-////                    if (task.isSuccessful) {
-////
-////                        val intent = Intent(this, MainActivity::class.java)
-////                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-////                        startActivity(intent)
-////
-////                        Toast.makeText(this, "로그인 성공", Toast.LENGTH_LONG).show()
-////
-////                    } else {
-////
-////                        Toast.makeText(this, "로그인 실패", Toast.LENGTH_LONG).show()
-////
-////                    }
-////                }
-//
-//
-//        }
-//
-//    }
-//}
