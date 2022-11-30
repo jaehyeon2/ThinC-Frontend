@@ -2,6 +2,7 @@ package com.example.heaven.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,11 @@ import com.example.heaven.myrecipeboard.MyrecipeBoardActivity
 import com.example.heaven.freeBoard.FreeBoardActivity
 import com.example.heaven.recipeBoard.RecipeBoardActivity
 import com.example.heaven.databinding.FragmentTalkBinding
+import com.example.heaven.myrecipeboard.MyrecipeBoardInsideActivity
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
+import java.net.URL
 
 
 class TalkFragment : Fragment() {
@@ -33,18 +39,17 @@ class TalkFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_talk, container, false)
 
         binding.talk1.setOnClickListener {
-            val intent = Intent(context, FreeBoardActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(context, FreeBoardActivity::class.java)
+//            startActivity(intent)
+            BoardPage()
         }
 
         binding.talk2.setOnClickListener {
-            val intent = Intent(context, RecipeBoardActivity::class.java)
-            startActivity(intent)
+            RecipePage()
         }
 
         binding.talk3.setOnClickListener {
-            val intent = Intent(context, MyrecipeBoardActivity::class.java)
-            startActivity(intent)
+            MyRecipePage()
         }
 
         binding.homeTap.setOnClickListener {
@@ -64,6 +69,96 @@ class TalkFragment : Fragment() {
         }
 
         return binding.root
+
+    }
+
+    private fun MyRecipePage() {
+        val url = URL("http://10.0.2.2:8080/recipe_owner_list?owner=test")
+        Thread{
+            try{
+                Log.w("connect", "success")
+
+                val connection = url.openConnection() as HttpURLConnection
+
+                val streamReader = InputStreamReader(connection.inputStream)
+                val buffered = BufferedReader(streamReader)
+
+                val json = StringBuilder()
+                while (true) {
+                    val data = buffered.readLine() ?: break
+                    json.append(data)
+                }
+
+                Log.w("message", json.toString())
+
+                val intent = Intent(context, MyrecipeBoardInsideActivity::class.java)
+                intent.putExtra("json",json.toString())
+                startActivity(intent)
+
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+        }.start()
+
+    }
+
+    private fun RecipePage() {
+        val url = URL("http://10.0.2.2:8080/recipe")
+        Thread{
+            try{
+                Log.w("connect", "success")
+
+                val connection = url.openConnection() as HttpURLConnection
+
+                val streamReader = InputStreamReader(connection.inputStream)
+                val buffered = BufferedReader(streamReader)
+
+                val json = StringBuilder()
+                while (true) {
+                    val data = buffered.readLine() ?: break
+                    json.append(data)
+                }
+
+                Log.w("message", json.toString())
+
+                val intent = Intent(context, RecipeBoardActivity::class.java)
+                intent.putExtra("json",json.toString())
+                startActivity(intent)
+
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+        }.start()
+
+    }
+
+    private fun BoardPage() {
+        val url = URL("http://10.0.2.2:8080/board")
+        Thread{
+            try{
+                Log.w("connect", "success")
+
+                val connection = url.openConnection() as HttpURLConnection
+
+                val streamReader = InputStreamReader(connection.inputStream)
+                val buffered = BufferedReader(streamReader)
+
+                val json = StringBuilder()
+                while (true) {
+                    val data = buffered.readLine() ?: break
+                    json.append(data)
+                }
+
+                Log.w("message", json.toString())
+
+                val intent = Intent(context, FreeBoardActivity::class.java)
+                intent.putExtra("json",json.toString())
+                startActivity(intent)
+
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+        }.start()
 
     }
 
