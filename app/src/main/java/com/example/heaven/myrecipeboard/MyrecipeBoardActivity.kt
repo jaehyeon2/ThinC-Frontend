@@ -54,16 +54,16 @@ class MyrecipeBoardActivity : AppCompatActivity() {
                 val streamReader = InputStreamReader(connection.inputStream)
                 val buffered = BufferedReader(streamReader)
 
-                val content = StringBuilder()
+                val json = StringBuilder()
                 while (true) {
                     val data = buffered.readLine() ?: break
-                    content.append(data)
+                    json.append(data)
                 }
 
-                Log.w("message", content.toString())
+                Log.w("message", json.toString())
 
                 val intent = Intent(this, MyrecipeBoardInsideActivity::class.java)
-                intent.putExtra("id",id)
+                intent.putExtra("json",json.toString())
                 startActivity(intent)
                 finish()
 

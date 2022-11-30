@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.heaven.R
 import com.example.heaven.databinding.ActivityMyrecipeBoardEditBinding
+import com.google.gson.Gson
 import java.io.*
 import java.net.HttpURLConnection
 import java.net.URL
@@ -26,6 +27,8 @@ class MyrecipeBoardEditActivity : AppCompatActivity() {
     private lateinit var profileImageBase64:String
 
     private var isImageUpload = false
+
+    private val json = intent.getStringExtra("json")
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -56,7 +59,10 @@ class MyrecipeBoardEditActivity : AppCompatActivity() {
 
     private fun editRecipe(){
         val title = binding.titleArea.text.toString()
-        val content = binding.contentArea.text.toString()
+        val ingredient = binding.ingredientArea.text.toString()
+        val process = binding.progressArea.text.toString()
+
+//        val category = binding.c
 //        val category = binding.categoryArea.text.toString()
 
         val url = URL("http://10.0.2.2:8080/write-post")
@@ -68,7 +74,7 @@ class MyrecipeBoardEditActivity : AppCompatActivity() {
         connection.doInput = true
         connection.doOutput = true
 
-        val jsonString = "{\"title\":$title, \"content\":$content, \"image\":$profileImageBase64}"
+        val jsonString = "{\"title\":$title, \"ingredient\":$ingredient, \"process\":$process, \"image\":$profileImageBase64}"
 
         // Send the JSON we created
         val outputStreamWriter = OutputStreamWriter(connection.outputStream)

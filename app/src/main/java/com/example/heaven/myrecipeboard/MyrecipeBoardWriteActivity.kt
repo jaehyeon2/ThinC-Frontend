@@ -11,7 +11,9 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.ImageView
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.heaven.R
@@ -33,6 +35,16 @@ class MyrecipeBoardWriteActivity : AppCompatActivity() {
     private var isImageUpload = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val cate = arrayOf("메인","간편식","반찬","찌개","국물","디저트","빵","샐러드","기타")
+
+        val cateSpinner: Spinner = binding.catespinner
+
+        val adapter: ArrayAdapter<String> = ArrayAdapter(this, android.R.layout.simple_list_item_1, cate)
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        cateSpinner.adapter = adapter
 
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_free_board_write)
@@ -61,9 +73,11 @@ class MyrecipeBoardWriteActivity : AppCompatActivity() {
 
     private fun writePost(){
         val title = binding.titleArea.text.toString()
-        val content = binding.contentArea.text.toString()
+        val cate = binding.catespinner.selectedItem.toString()
+        val ingredient = binding.ingredientArea.text.toString()
+        val progress = binding.progressArea.text.toString()
 
-        val url = URL("http://10.0.2.2:8080/board/write-post")
+        val url = URL("http://10.0.2.2:8080/recipe/write-recipe")
         val connection = url.openConnection() as HttpURLConnection
 
         connection.requestMethod = "POST"
@@ -72,7 +86,7 @@ class MyrecipeBoardWriteActivity : AppCompatActivity() {
         connection.doInput = true
         connection.doOutput = true
 
-        val jsonString = "{\"title\":$title, \"content\":$content, \"image\":$profileImageBase64}"
+        val jsonString = "{\"title\":$title, \"cate\":$cate, \"ingredient\":$ingredient, \"progress\":$progress, \"image\":$profileImageBase64}"
 
         // Send the JSON we created
         val outputStreamWriter = OutputStreamWriter(connection.outputStream)

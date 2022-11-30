@@ -8,7 +8,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.heaven.R
 
-class MyrecipeBoardListLVAdapter(val boardList : MutableList<MyrecipeBoardModel>) : BaseAdapter() {
+class MyrecipeBoardListLVAdapter(private val boardList : MutableList<MyrecipeBoardModel>) : BaseAdapter() {
 
     override fun getCount(): Int {
         return boardList.size
@@ -30,16 +30,18 @@ class MyrecipeBoardListLVAdapter(val boardList : MutableList<MyrecipeBoardModel>
 
         val itemLinearLayoutView = view?.findViewById<LinearLayout>(R.id.itemView)
         val title = view?.findViewById<TextView>(R.id.titleArea)
-        val content = view?.findViewById<TextView>(R.id.integrateArea)
-        val time = view?.findViewById<TextView>(R.id.timeArea)
+        val ingredient = view?.findViewById<TextView>(R.id.integrateArea)
+        val process = view?.findViewById<TextView>(R.id.progressArea)
+        val category = view?.findViewById<TextView>(R.id.catespinner)
 
 //        if(boardList[position].uid.equals(FBAuth.getUid())) {
 //            itemLinearLayoutView?.setBackgroundColor(Color.parseColor("#ffa500"))
 //        }
 
         title!!.text = boardList[position].title
-        content!!.text = boardList[position].content
-        time!!.text = boardList[position].time
+        ingredient!!.text = boardList[position].ingredient
+        process!!.text = boardList[position].process
+        category!!.text = boardList[position].category
 
         return view!!
     }
