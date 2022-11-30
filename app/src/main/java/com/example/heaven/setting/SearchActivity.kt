@@ -13,6 +13,7 @@ import com.example.heaven.MainActivity
 import com.example.heaven.R
 import com.example.heaven.contentsList.ContentListActivity
 import com.example.heaven.databinding.ActivitySearchBinding
+import com.example.heaven.recipeBoard.RecipeBoardActivity
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
@@ -45,9 +46,8 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun search() {
-        Log.w("search", "search process")
-        var search = binding.searchArea.text.toString()
-        val url = URL("http://10.0.2.2:8080/search?search=$search")
+        val search = binding.searchArea.text.toString()
+        val url = URL("http://10.0.2.2:8080/recipe/search?keyword=$search")
         Thread{
             try{
                 Log.w("connect", "success")
@@ -57,13 +57,18 @@ class SearchActivity : AppCompatActivity() {
                 val streamReader = InputStreamReader(connection.inputStream)
                 val buffered = BufferedReader(streamReader)
 
-                val content = StringBuilder()
+                val json = StringBuilder()
                 while (true) {
                     val data = buffered.readLine() ?: break
-                    content.append(data)
+                    json.append(data)
                 }
 
-                Log.w("message", content.toString())
+                Log.w("message", json.toString())
+
+                val intent = Intent(this, RecipeBoardActivity::class.java)
+                intent.putExtra("json",json.toString())
+                startActivity(intent)
+                finish()
 
             }catch (e:Exception){
                 e.printStackTrace()
