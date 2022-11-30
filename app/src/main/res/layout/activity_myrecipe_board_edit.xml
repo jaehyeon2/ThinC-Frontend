@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".myrecipeboard.MyrecipeBoardEditActivity">
+        tools:context=".myrecipeboard.MyrecipeBoardEditActivity"
+        android:orientation="vertical">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -51,13 +52,81 @@
                     android:layout_marginRight="20dp"
                     android:background="#000000"/>
 
-                <EditText
-                    android:id="@+id/contentArea"
-                    android:layout_margin="20dp"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:hint="내용을 입력해주세요"
-                    android:background="@android:color/transparent"
-                    android:layout_height="60dp"/>
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="60dp"
+                        android:layout_margin="20dp"
+                        android:background="@android:color/transparent"
+                        android:text="카테고리" />
+
+                    <Spinner
+                        android:id="@+id/catespinner"
+                        android:layout_margin="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:background="#bbb"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="#000000"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="60dp"
+                        android:layout_margin="20dp"
+                        android:background="@android:color/transparent"
+                        android:text="재료" />
+
+                    <EditText
+                        android:id="@+id/ingredientArea"
+                        android:layout_margin="20dp"
+                        android:layout_width="match_parent"
+                        android:hint="내용을 입력해주세요"
+                        android:background="@android:color/transparent"
+                        android:layout_height="60dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="#000000"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="60dp"
+                        android:layout_margin="20dp"
+                        android:background="@android:color/transparent"
+                        android:text="진행방법" />
+
+                    <EditText
+                        android:id="@+id/progressArea"
+                        android:layout_margin="20dp"
+                        android:layout_width="match_parent"
+                        android:hint="내용을 입력해주세요"
+                        android:background="@android:color/transparent"
+                        android:layout_height="60dp"/>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"

@@ -52,7 +52,7 @@
                     android:background="#000000"/>
 
                 <EditText
-                    android:id="@+id/contentArea"
+                    android:id="@+id/integrateArea"
                     android:layout_margin="20dp"
                     android:layout_width="match_parent"
                     android:hint="내용을 입력해주세요"
