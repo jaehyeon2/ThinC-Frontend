@@ -65,7 +65,7 @@ class MyrecipeBoardEditActivity : AppCompatActivity() {
 //        val category = binding.c
 //        val category = binding.categoryArea.text.toString()
 
-        val url = URL("http://10.0.2.2:8080/write-post")
+        val url = URL("http://10.0.2.2:8080/recipe/edit-recipe")
         val connection = url.openConnection() as HttpURLConnection
 
         connection.requestMethod = "POST"

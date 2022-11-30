@@ -76,7 +76,7 @@ class FreeBoardWriteActivity : AppCompatActivity() {
         val title = binding.titleArea.text.toString()
         val content = binding.contentArea.text.toString()
 
-        val url = URL("http://10.0.2.2:8080/write-post")
+        val url = URL("http://10.0.2.2:8080/board/write-post")
         val connection = url.openConnection() as HttpURLConnection
 
         connection.requestMethod = "POST"

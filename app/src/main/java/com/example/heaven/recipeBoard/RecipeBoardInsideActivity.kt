@@ -41,7 +41,7 @@ class RecipeBoardInsideActivity : AppCompatActivity() {
 
     private lateinit var commentAdapter : CommentLVAdapter
 
-    val id = intent.getStringExtra("id").toString().toLong()
+    val json = intent.getStringExtra("json").toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -49,21 +49,21 @@ class RecipeBoardInsideActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_recipe_board_inside)
 
-        binding.boardSettingIcon.setOnClickListener {
-            showDia(id)
-        }
+//        binding.boardSettingIcon.setOnClickListener {
+//            showDia(id)
+//        }
 
         // 두번째 방법
-        key = intent.getStringExtra("key").toString()
-        getBoard2Data(key)
-        getImage2Data(key)
+//        key = intent.getStringExtra("key").toString()
+//        getBoard2Data(key)
+//        getImage2Data(key)
+//
+//
+//        binding.commentBtn.setOnClickListener {
+//            insertComment(key)
+//        }
 
-
-        binding.commentBtn.setOnClickListener {
-            insertComment(key)
-        }
-
-        getCommentData(key)
+//        getCommentData(key)
 
         commentAdapter = CommentLVAdapter(commentDataList)
         binding.commentLV.adapter = commentAdapter
@@ -98,7 +98,7 @@ class RecipeBoardInsideActivity : AppCompatActivity() {
 
     }
 
-    fun insertComment(key : String){
+//    fun insertComment(key : String){
         // comment
         //   - BoardKey
         //        - CommentKey
@@ -114,65 +114,65 @@ class RecipeBoardInsideActivity : AppCompatActivity() {
 //                    FBAuth.getTime()
 //                )
 //            )
+//
+//        Toast.makeText(this, "댓글 입력 완료", Toast.LENGTH_SHORT).show()
+//        binding.commentArea.setText("")
+//
+//    }
 
-        Toast.makeText(this, "댓글 입력 완료", Toast.LENGTH_SHORT).show()
-        binding.commentArea.setText("")
+//    private fun showDia(id: Long){
+//
+//        val mDialogView = LayoutInflater.from(this).inflate(R.layout.custom_dialog, null)
+//        val mBuilder = AlertDialog.Builder(this)
+//            .setView(mDialogView)
+//            .setTitle("게시글 수정/삭제")
+//
+//        val alertDialog = mBuilder.show()
+//        alertDialog.findViewById<Button>(R.id.editBtn)?.setOnClickListener {
+//            Toast.makeText(this, "수정 버튼을 눌렀습니다", Toast.LENGTH_LONG).show()
+//
+////            val intent = Intent(this, RecipeBoardEditActivity::class.java)
+////            intent.putExtra("key",key)
+////            startActivity(intent)
+//        }
+//
+//        alertDialog.findViewById<Button>(R.id.removeBtn)?.setOnClickListener {
+//
+//            deletePost(id)
+////            FBRef.boardRef2.child(key).removeValue()
+//            Toast.makeText(this, "삭제완료", Toast.LENGTH_LONG).show()
+//            finish()
+//
+//        }
+//
+//
+//
+//    }
 
-    }
-
-    private fun showDia(id: Long){
-
-        val mDialogView = LayoutInflater.from(this).inflate(R.layout.custom_dialog, null)
-        val mBuilder = AlertDialog.Builder(this)
-            .setView(mDialogView)
-            .setTitle("게시글 수정/삭제")
-
-        val alertDialog = mBuilder.show()
-        alertDialog.findViewById<Button>(R.id.editBtn)?.setOnClickListener {
-            Toast.makeText(this, "수정 버튼을 눌렀습니다", Toast.LENGTH_LONG).show()
-
-            val intent = Intent(this, RecipeBoardEditActivity::class.java)
-            intent.putExtra("key",key)
-            startActivity(intent)
-        }
-
-        alertDialog.findViewById<Button>(R.id.removeBtn)?.setOnClickListener {
-
-            deletePost(id)
-//            FBRef.boardRef2.child(key).removeValue()
-            Toast.makeText(this, "삭제완료", Toast.LENGTH_LONG).show()
-            finish()
-
-        }
-
-
-
-    }
-
-    private fun deletePost(id:Long){
-        val url = URL("http://10.0.2.2:8080/delete-recipe-post?id=$id")
-        Thread{
-            try{
-                Log.w("delete-recipe", "deleteRecipeBoard")
-
-                val connection = url.openConnection() as HttpURLConnection
-
-                val streamReader = InputStreamReader(connection.inputStream)
-                val buffered = BufferedReader(streamReader)
-
-                val content = StringBuilder()
-                while (true) {
-                    val data = buffered.readLine() ?: break
-                    content.append(data)
-                }
-
-                Log.w("deleteReceipeBoard", content.toString())
-
-            }catch (e:Exception){
-                e.printStackTrace()
-            }
-        }.start()
-    }
+//    private fun deletePost(id:Long){
+//        val url = URL("http://10.0.2.2:8080/recipe/delete-recipe-post?id=$id")
+//        Thread{
+//            try{
+//                Log.w("delete-recipe", "deleteRecipeBoard")
+//
+//                val connection = url.openConnection() as HttpURLConnection
+//
+//                val streamReader = InputStreamReader(connection.inputStream)
+//                val buffered = BufferedReader(streamReader)
+//
+//                val content = StringBuilder()
+//                while (true) {
+//                    val data = buffered.readLine() ?: break
+//                    content.append(data)
+//                }
+//
+//                Log.w("deleteReceipeBoard", content.toString())
+//
+//            }catch (e:Exception){
+//                e.printStackTrace()
+//            }
+//        }.start()
+//    }
 
     private fun getImage2Data(key : String){
 

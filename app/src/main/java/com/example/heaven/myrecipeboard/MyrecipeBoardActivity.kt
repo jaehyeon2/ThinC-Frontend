@@ -44,7 +44,7 @@ class MyrecipeBoardActivity : AppCompatActivity() {
 
     private fun MyrecipeBoardDetail(id:Long) {
         Log.w("BoardDetail", "MyrecipeBoardDetail")
-        val url = URL("http://10.0.2.2:8080/myrecipeboard_detail?id=$id")
+        val url = URL("http://10.0.2.2:8080/recipe/myrecipeboard_detail?id=$id")
         Thread{
             try{
                 Log.w("connect", "success")

@@ -50,17 +50,11 @@ class MyrecipeBoardInsideActivity : AppCompatActivity() {
             showDia(id)
         }
 
-        // 두번째 방법
-        key = intent.getStringExtra("key").toString()
-        getBoard3Data(key)
-        getImage3Data(key)
-
-
-        binding.commentBtn.setOnClickListener {
-            insertComment(key)
-        }
-
-        getCommentData(key)
+//        binding.commentBtn.setOnClickListener {
+//            insertComment(key)
+//        }
+//
+//        getCommentData(key)
 
         commentAdapter = CommentLVAdapter(commentDataList)
         binding.commentLV.adapter = commentAdapter
@@ -129,7 +123,7 @@ class MyrecipeBoardInsideActivity : AppCompatActivity() {
             Toast.makeText(this, "수정 버튼을 눌렀습니다", Toast.LENGTH_LONG).show()
 
             val intent = Intent(this, MyrecipeBoardEditActivity::class.java)
-            intent.putExtra("key",key)
+            intent.putExtra("id",id)
             startActivity(intent)
         }
 
@@ -147,7 +141,7 @@ class MyrecipeBoardInsideActivity : AppCompatActivity() {
     }
 
     private fun deletePost(id:Long){
-        val url = URL("http://10.0.2.2:8080/delete-myrecipe-post?id=$id")
+        val url = URL("http://10.0.2.2:8080/recipe/delete-myrecipe-post?id=$id")
         Thread{
             try{
                 Log.w("delete-myrecipe", "deleteMyrecipeBoard")

@@ -3,18 +3,10 @@ package com.example.heaven.recipeBoard
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.heaven.R
 import com.example.heaven.databinding.ActivityRecipeBoardBinding
-import com.example.heaven.freeBoard.FreeBoardInsideActivity
-import com.example.heaven.utils.FBRef
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
@@ -52,53 +44,12 @@ class RecipeBoardActivity : AppCompatActivity() {
 
         }
 
-        binding.writeBtn.setOnClickListener {
-            val intent = Intent(this, RecipeBoardWriteActivity::class.java)
-            startActivity(intent)
-        }
-
-        getFBBoardData()
-
     }
 
-    private fun getFBBoardData(){
-
-//        val postListener = object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//
-//                boardDataList.clear()
-//
-//                for (dataModel2 in dataSnapshot.children) {
-//
-//                    Log.d(TAG, dataModel2.toString())
-////                    dataModel.key
-//
-//                    val item = dataModel2.getValue(RecipeBoardModel::class.java)
-//                    boardDataList.add(item!!)
-//                    boardKeyList.add(dataModel2.key.toString())
-//
-//                }
-//                boardKeyList.reverse()
-//                boardDataList.reverse()
-//                boardRVAdapter.notifyDataSetChanged()
-//
-//                Log.d(TAG, boardDataList.toString())
-//
-//
-//            }
-//
-//            override fun onCancelled(databaseError: DatabaseError) {
-//                // Getting Post failed, log a message
-//                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
-//            }
-//        }
-//        FBRef.boardRef2.addValueEventListener(postListener)
-
-    }
 
     private fun RecipeBoardDetail(id:Long) {
         Log.w("BoardDetail", "RecipeBoardDetail")
-        val url = URL("http://10.0.2.2:8080/recipeboard_detail?id=$id")
+        val url = URL("http://10.0.2.2:8080/recipe/recipeboard_detail?id=$id")
         Thread{
             try{
                 Log.w("connect", "success")
@@ -108,15 +59,15 @@ class RecipeBoardActivity : AppCompatActivity() {
                 val streamReader = InputStreamReader(connection.inputStream)
                 val buffered = BufferedReader(streamReader)
 
-                val content = StringBuilder()
+                val json = StringBuilder()
                 while (true) {
                     val data = buffered.readLine() ?: break
-                    content.append(data)
+                    json.append(data)
                 }
 
-                Log.w("message", content.toString())
+                Log.w("message", json.toString())
                 val intent = Intent(this, RecipeBoardInsideActivity::class.java)
-                intent.putExtra("id",id)
+                intent.putExtra("json",json.toString())
                 startActivity(intent)
                 finish()
 

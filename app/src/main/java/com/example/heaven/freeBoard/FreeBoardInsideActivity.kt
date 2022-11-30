@@ -80,7 +80,7 @@ class FreeBoardInsideActivity : AppCompatActivity() {
     }
 
     private fun deletePost(id:Long){
-        val url = URL("http://10.0.2.2:8080/delete-free-post?id=$id")
+        val url = URL("http://10.0.2.2:8080/board/delete-free-post?id=$id")
         Thread{
             try{
                 Log.w("delete-free", "deleteFreeBoard")

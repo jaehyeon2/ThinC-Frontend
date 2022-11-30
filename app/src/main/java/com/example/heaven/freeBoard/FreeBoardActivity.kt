@@ -47,7 +47,7 @@ class FreeBoardActivity : AppCompatActivity() {
 
     private fun freeBoardDetail(id:Long) {
         Log.w("BoardDetail", "FreeBoardDetail")
-        val url = URL("http://10.0.2.2:8080/freeboard_detail?id=$id")
+        val url = URL("http://10.0.2.2:8080/board/freeboard_detail?id=$id")
         Thread{
             try{
                 Log.w("connect", "success")
